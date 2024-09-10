@@ -1,5 +1,4 @@
 from pynput import keyboard
-from pynput.keyboard import Key
 import pyautogui
 
 
@@ -31,3 +30,17 @@ def listen():
         word = "".join(letters)
         letters.clear()
         return word
+    
+
+def clear_word(press_count: int):
+    """presses backspace several times to clear a word.
+
+    Args:
+        press_count (int): the number of times the backspace key is going to get pressed.
+    """
+    pyautogui.press("backspace", presses=press_count)
+
+
+def write_word(word):
+    pyautogui.write(word)
+    
