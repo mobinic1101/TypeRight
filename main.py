@@ -1,4 +1,5 @@
-from listener import listen
+import pyautogui
+from input_handler import listen
 from validation import is_word_correctable
 from corrector import correct
 
@@ -12,8 +13,13 @@ def main():
             print(f"word '{user_word}' is not correctable")
             continue
 
+        # correcting the word
         new_word = correct(user_word)
         print("corrected: ", new_word)
+
+        # replacing the new word
+        pyautogui.press("backspace", presses=len(user_word) + 1)
+
         
 
 if __name__ == '__main__':

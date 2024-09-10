@@ -59,4 +59,4 @@ def is_word_correctable(word: str, max_len: int = settings.MAX_WORD_LENGTH):
     return True
 
 if __name__ == '__main__':
-    print(is_word_correctable("hollo"))
+    print(is_word_correctable("hollo "))
