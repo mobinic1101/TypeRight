@@ -1,5 +1,6 @@
 from pynput import keyboard
-# import pyautogui
+from pynput.keyboard import Key
+import pyautogui
 
 
 class StopListening(Exception):
@@ -10,11 +11,11 @@ def on_press(key: keyboard.Key | keyboard.KeyCode, letters: list):
     if isinstance(key, keyboard.Key):
         if key == keyboard.Key.space:
             print(f"'space' key pressed")
+            letters.append(" ")
             raise StopListening()
-        elif key == keyboard.Key.backspace or key == keyboard.Key.enter:
+        elif (key == keyboard.Key.backspace
+              or key == keyboard.Key.enter):
             letters.append("!")
-        elif key == keyboard.Key.enter:
-            letters.clear()
     else:
         letters.append(key.char)
 
