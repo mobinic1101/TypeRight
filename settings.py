@@ -1,2 +1,3 @@
 MAX_WORD_LENGTH = 20
 WORDS_FILE_PATH = "./words.txt"
+MIN_WORD_LENGTH = 3

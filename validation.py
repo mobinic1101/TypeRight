@@ -1,9 +1,9 @@
 from string import digits, punctuation
-from corrector import all_words
+from utils import all_words
 import settings
 
 
-def has_digits_or_punctuation(word: str):
+def has_digits_or_punctuation(word: str|list):
     for char in word:
         if char in digits or char in punctuation:
             return True
@@ -33,7 +33,7 @@ def check_repetition(word: str):
     return False
 
 
-def is_word_correctable(word: str, max_len: int = settings.MAX_WORD_LENGTH):
+def is_word_correctable(word: str):
     """
     returns False if word is already correct or
     cant get corrected otherwise returns True
@@ -47,7 +47,7 @@ def is_word_correctable(word: str, max_len: int = settings.MAX_WORD_LENGTH):
         boolean: True or False
     """
     false_conditions = [
-        max_len < len(word) < 3,
+        len(word) > settings.MAX_WORD_LENGTH or len(word) < settings.MIN_WORD_LENGTH,
         has_digits_or_punctuation(word),
         check_repetition(word),
         word in all_words,

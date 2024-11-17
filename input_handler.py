@@ -1,5 +1,7 @@
 from pynput import keyboard
-import pyautogui
+from validation import has_digits_or_punctuation
+
+controller = keyboard.Controller()
 
 
 class StopListening(Exception):
@@ -12,9 +14,8 @@ def on_press(key: keyboard.Key | keyboard.KeyCode, letters: list):
             print(f"'space' key pressed")
             letters.append(" ")
             raise StopListening()
-        elif (key == keyboard.Key.backspace
-              or key == keyboard.Key.enter):
-            letters.append("!")
+        elif key == keyboard.Key.backspace or key == keyboard.Key.enter:
+            letters.append('!')
     else:
         letters.append(key.char)
 
@@ -25,12 +26,15 @@ def listen():
     try:
         listener.start()
         listener.join()
-    except (StopListening):
+    except StopListening:
         listener.stop()
+        print(f"letters before: {letters}")
+        if has_digits_or_punctuation(letters):
+            letters.clear()
+        print(f"letters after {letters}")
         word = "".join(letters)
-        letters.clear()
         return word
-    
+
 
 def clear_word(press_count: int):
     """presses backspace several times to clear a word.
@@ -38,9 +42,9 @@ def clear_word(press_count: int):
     Args:
         press_count (int): the number of times the backspace key is going to get pressed.
     """
-    pyautogui.press("backspace", presses=press_count)
+    for _ in range(press_count):
+        controller.tap(keyboard.Key.backspace)
 
 
 def write_word(word):
-    pyautogui.write(word)
-    
+    controller.type(word)

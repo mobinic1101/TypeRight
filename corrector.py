@@ -1,10 +1,10 @@
-from utils import get_all_words
+from utils import all_words
 
-all_words = get_all_words()
 # all_words = ["the", "laos"]
 
 
 def correct(word1: str):
+    min_score = len(word1) - 3
     word1 = word1.lower()
     best_word = {"word": None, "score": 0}
     for word2 in all_words:
@@ -50,7 +50,7 @@ def correct(word1: str):
 
         if word2_score > best_word["score"]:
             best_word = {"word": word2, "score": word2_score}
-    if best_word["score"] <= 3:
+    if best_word["score"] <= min_score:
         best_word = {"word": None, "score": 0}
     return best_word
 
