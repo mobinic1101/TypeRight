@@ -22,11 +22,11 @@ def main():
 
         # replacing the new word
         new_word = new_word["word"]
-        if new_word:
+        if new_word:  # the word returned by correct can be None
             input_handler.clear_word(len(user_word) + 1)
             input_handler.write_word(new_word + word_separator)
-        
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     print("hello there")
     main()
