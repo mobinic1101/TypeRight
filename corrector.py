@@ -12,6 +12,7 @@ def correct(word1: str):
             continue
         fail_match = 0
         max_failure_match = 2
+        matched_word2_pointers = set()
         word2_score = 0
         word1_pointer = 0
         start = 0
@@ -27,6 +28,7 @@ def correct(word1: str):
             for word2_pointer in range(start, len(word2)):
                 current_word2_char = word2[word2_pointer]
                 if current_word1_char == current_word2_char:
+                    matched_word2_pointers.add(word2_pointer)
                     word2_score += 1
                     word1_pointer += 1
                     start = word2_pointer + 1
@@ -38,7 +40,11 @@ def correct(word1: str):
                 # skips a letter from word1 and tries to compare the next character with the current_word2_char
                 if word1_letter_skip_chance > 0:
                     if word1_pointer < len(word1) - 1:
-                        if word1[word1_pointer + 1] == current_word2_char:
+                        if (
+                            word1[word1_pointer + 1] == current_word2_char
+                            and word2_pointer not in matched_word2_pointers
+                        ):
+                            matched_word2_pointers.add(word2_pointer)
                             word2_score += 1
                             word1_pointer += 2
                             start = word2_pointer + 2
@@ -51,7 +57,11 @@ def correct(word1: str):
                 #       ^
                 if word2_letter_step_back_chance > 0:
                     if word2_pointer > 0:
-                        if current_word1_char == word2[word2_pointer - 1]:
+                        if (
+                            current_word1_char == word2[word2_pointer - 1]
+                            and word2_pointer - 1 not in matched_word2_pointers
+                        ):
+                            matched_word2_pointers.add(word2_pointer - 1)
                             word2_score += 1
                             word1_pointer += 1
                             word2_letter_step_back_chance -= 1
@@ -74,7 +84,7 @@ def correct(word1: str):
     return best_word
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     while True:
         user_word = input(">>>")
         if user_word == "fuck":
