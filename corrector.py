@@ -1,6 +1,6 @@
 from utils import all_words
 
-# all_words = ["the", "laos"]
+# all_words = ["password"]
 
 
 def correct(word1: str):
@@ -15,7 +15,9 @@ def correct(word1: str):
         word2_score = 0
         word1_pointer = 0
         start = 0
-        next_letter_lookup_chance = 2
+        word1_letter_skip_chance = 2
+        word2_letter_step_back_chance = 1
+        # both_skip_chance = 2
         while not (
             fail_match >= max_failure_match
             or word1_pointer > len(word1) - 1
@@ -29,15 +31,30 @@ def correct(word1: str):
                     word1_pointer += 1
                     start = word2_pointer + 1
                     break
-                
-                if next_letter_lookup_chance > 0:
+
+                # this condition helps for words like passwrod instead of password
+                # skips a letter from word1 and tries to compare the next character with the current_word2_char
+                if word1_letter_skip_chance > 0:
                     if word1_pointer < len(word1) - 1:
                         if word1[word1_pointer + 1] == current_word2_char:
                             word2_score += 1
                             word1_pointer += 2
                             start = word2_pointer + 2
-                            next_letter_lookup_chance -= 1
+                            word1_letter_skip_chance -= 1
                             break
+                # this helps for words like this piassword instead of password
+                # # piasswrod
+                #       ^
+                # # password
+                #       ^
+                if word2_letter_step_back_chance > 0:
+                    if word2_pointer > 0:
+                        if current_word1_char == word2[word2_pointer - 1]:
+                            word2_score += 1
+                            word1_pointer += 1
+                            word2_letter_step_back_chance -= 1
+                            break
+
                 # elif
                 # handle failure
                 if word1_pointer > 0:
