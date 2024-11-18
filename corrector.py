@@ -15,9 +15,9 @@ def correct(word1: str):
         word2_score = 0
         word1_pointer = 0
         start = 0
-        word1_letter_skip_chance = 2
+        word1_letter_skip_chance = 1
         word2_letter_step_back_chance = 1
-        # both_skip_chance = 2
+        both_skip_chance = 1
         while not (
             fail_match >= max_failure_match
             or word1_pointer > len(word1) - 1
@@ -31,6 +31,8 @@ def correct(word1: str):
                     word1_pointer += 1
                     start = word2_pointer + 1
                     break
+
+                # this condition skips
 
                 # this condition helps for words like passwrod instead of password
                 # skips a letter from word1 and tries to compare the next character with the current_word2_char
