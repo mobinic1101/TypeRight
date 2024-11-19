@@ -6,7 +6,7 @@ TypeRight is a simple yet effective autocorrect tool built using Python. It aims
 
 ## 🛠️ Installation
 
-To get started with TypeRight, follow these steps:
+To get started with TypeRight, You should have python3.12+ installed on your system; then follow these steps:
 
 1. **Clone the Repository**
    ```bash
