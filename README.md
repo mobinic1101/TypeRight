@@ -1,7 +1,5 @@
 # TypeRight ⌨️
 
-> Because life's too short for typos! 
-
 TypeRight is a simple yet effective autocorrect tool built using Python. It aims to improve your typing experience by automatically correcting common spelling mistakes in real-time.
 
 ## 🛠️ Installation
@@ -33,22 +31,9 @@ After launching TypeRight, it will run in the background and automatically corre
 
 ## 🤝 Contributing
 
-TypeRight is still in its early stages and welcomes contributions! Here's how you can help:
-
-- Report bugs and suggest features
-- Submit pull requests
-- Improve documentation
-- Share your feedback
-
-
-## ✨ Acknowledgments
-
-- Thanks to all contributors who help make TypeRight better
-- Special thanks to the Python community for amazing libraries
-- And to all the typos that inspired this project! 
+TypeRight is still in its early stages and welcomes contributions.
 
 ---
 
 *Remember: TypeRight is here to make your typing Wright... er, right! 😉*
 
-**Made with ❤️ by [Mobin Karimi (me)]**
